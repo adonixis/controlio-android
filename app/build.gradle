@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+android {
+    compileSdkVersion 27
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId "ru.adonixis.controlio"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 20
+        versionName "1.2.8"
+        vectorDrawables.useSupportLibrary = true
+        resConfigs "en"
+    }
+
+    signingConfigs {
+        release {
+            try {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("You should define RELEASE_STORE_FILE, RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS and RELEASE_KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
+
+        buildTypes.each {
+            it.buildConfigField 'String', 'BASE_URL', BASE_URL
+            it.buildConfigField 'String', 'API_KEY', API_KEY
+            it.buildConfigField 'String', 'DEMO_EMAIL', DEMO_EMAIL
+            it.buildConfigField 'String', 'DEMO_PASSWORD', DEMO_PASSWORD
+            it.buildConfigField 'String', 'STRIPE_PUBLISHABLE_KEY_TEST', STRIPE_PUBLISHABLE_KEY_TEST
+            it.buildConfigField 'String', 'STRIPE_PUBLISHABLE_KEY_LIVE', STRIPE_PUBLISHABLE_KEY_LIVE
+            it.buildConfigField 'String', 'IDENTITY_POOL_ID', IDENTITY_POOL_ID
+            it.buildConfigField 'String', 'S3_BUCKET_NAME', S3_BUCKET_NAME
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Controlio-" + "${variant.name}-${variant.versionName}.apk"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:customtabs:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    implementation "com.android.support:preference-v7:$supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
+    implementation "io.reactivex:rxandroid:$rxandroidVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    implementation "com.amazonaws:aws-android-sdk-s3:$amazonawsVersion"
+    implementation "com.stripe:stripe-android:$stripeVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.google.firebase:firebase-messaging:$firebaseVersion"
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion") {
+        transitive = true
+    }
+    implementation "com.facebook.android:facebook-android-sdk:$facebookVersion"
+}
+
+apply plugin: 'com.google.gms.google-services'

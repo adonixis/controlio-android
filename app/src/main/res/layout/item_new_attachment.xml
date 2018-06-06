@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable name="attachment" type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/image_new_attachment"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop"
+            bind:s3ObjectKey="@{attachment}"
+            app:srcCompat="@drawable/ava"
+            android:contentDescription="@string/content_description_new_attachment"
+            />
+
+        <ImageView
+            android:id="@+id/icon_cross"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_cross_pastel_purple_20dp"
+            android:contentDescription="@string/content_description_icon_cross"
+            />
+
+    </RelativeLayout>
+</layout>

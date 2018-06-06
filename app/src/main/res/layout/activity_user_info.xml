@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable name="user" type="ru.adonixis.controlio.model.UserResponse" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.UserInfoActivity"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:background="@color/gray"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:background="@color/white"
+                >
+
+                <ImageView
+                    android:id="@+id/image_user_photo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:scaleType="centerCrop"
+                    bind:s3ObjectKey="@{user.getPhoto()}"
+                    app:srcCompat="@drawable/ava"
+                    android:contentDescription="@string/content_description_user_photo"
+                    />
+
+                <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/image_user_photo"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text='@{user.getName() != null ? user.getName() : @string/label_no_name}'
+                    android:textColor='@{user.getName() != null ? @color/text_gray : @color/text_gray_light}'
+                    tools:text="User Name"
+                    />
+
+                <TextView
+                    android:id="@+id/text_user_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_user_name"
+                    app:layout_constraintRight_toLeftOf="@+id/image_user_photo"
+                    android:textSize="14sp"
+                    android:textColor="@color/green_blue"
+                    android:text="@{user.getEmail()}"
+                    android:autoLink="email"
+                    tools:text="user@mail.com"
+                    />
+
+                <TextView
+                    android:id="@+id/text_user_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_user_email"
+                    app:layout_constraintRight_toLeftOf="@+id/image_user_photo"
+                    android:textSize="14sp"
+                    android:text='@{user.getPhone() != null ? user.getPhone() : @string/label_no_phone}'
+                    android:textColor='@{user.getPhone() != null ? @color/green_blue : @color/text_gray_light}'
+                    android:autoLink="phone"
+                    tools:text="+79871234567"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

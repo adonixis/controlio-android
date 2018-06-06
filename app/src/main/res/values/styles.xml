@@ -1,0 +1,165 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/pastel_purple</item>
+        <item name="colorPrimaryDark">@color/purple</item>
+        <item name="colorAccent">@color/green_blue</item>
+
+        <item name="android:buttonStyle">@style/AppTheme.Button</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextView</item>
+        <item name="android:editTextStyle">@style/AppTheme.EditText</item>
+
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+
+        <item name="actionButtonStyle">@style/AppTheme.Widget.ActionButton</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="colorPrimary">@color/pastel_purple</item>
+        <item name="colorPrimaryDark">@color/purple</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Transparent" parent="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.Login" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/pastel_purple</item>
+        <item name="colorPrimaryDark">@color/purple</item>
+        <item name="android:windowBackground">@drawable/login_background</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+
+        <item name="colorButtonNormal">@color/purple</item>
+    </style>
+
+    <style name="AppTheme.Light.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme.Green.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/dark_green_blue</item>
+        <item name="android:colorBackground">@color/dark_green_blue</item>
+    </style>
+
+    <style name="AppTheme.Light.DialogTransparent" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+    </style>
+
+    <style name="AppTheme.Button.Login" parent="AppTheme.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_login</item>
+        <item name="android:textColor">#A0000000</item>
+    </style>
+
+    <style name="AppTheme.Button.Submit" parent="AppTheme.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_create</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.Button.Plan" parent="AppTheme.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_plan_drawable</item>
+        <item name="android:textColor">@drawable/button_plan_text_color</item>
+    </style>
+
+    <style name="AppTheme.Button.Link" parent="AppTheme.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme.ToogleButton" parent="Widget.AppCompat.Button">
+    </style>
+
+    <style name="AppTheme.ToggleButton.GreenBlue" parent="AppTheme.ToogleButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/toggle_button_green_blue_text_color</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:minHeight">24dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
+
+    <style name="AppTheme.ToggleButton.GreenBlue.Left" parent="AppTheme.ToggleButton.GreenBlue">
+        <item name="android:background">@drawable/toggle_button_green_blue_left_drawable</item>
+    </style>
+
+    <style name="AppTheme.ToggleButton.GreenBlue.Right" parent="AppTheme.ToggleButton.GreenBlue">
+        <item name="android:background">@drawable/toggle_button_green_blue_right_drawable</item>
+    </style>
+
+    <style name="AppTheme.ToggleButton.PastelPurple" parent="AppTheme.ToogleButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/toggle_button_pastel_purple_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">24dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
+
+    <style name="AppTheme.ToggleButton.PastelPurple.Left" parent="AppTheme.ToggleButton.PastelPurple">
+        <item name="android:background">@drawable/toggle_button_pastel_purple_left_drawable</item>
+    </style>
+
+    <style name="AppTheme.ToggleButton.PastelPurple.Right" parent="AppTheme.ToggleButton.PastelPurple">
+        <item name="android:background">@drawable/toggle_button_pastel_purple_right_drawable</item>
+    </style>
+
+
+    <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
+    </style>
+
+    <style name="ErrorTextWhite" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ErrorTextGray" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/text_gray_light</item>
+    </style>
+
+    <style name="AppTheme.TextView" parent="android:Widget.TextView">
+    </style>
+
+    <style name="AppTheme.TextView.ClientEmail" parent="AppTheme.TextView">
+        <item name="android:background">@drawable/textview_rounded</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="AppTheme.Widget.ActionButton" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

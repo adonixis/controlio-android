@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <import type="ru.adonixis.controlio.util.DateTextUtils"/>
+        <import type="android.view.View"/>
+        <variable name="projectInfo" type="ru.adonixis.controlio.model.ProjectDetailsResponse" />
+        <variable name="ownerInvited" type="ru.adonixis.controlio.model.UserResponse" />
+        <variable name="managersInvitedIsExists" type="boolean" />
+        <variable name="clientsInvitedIsExists" type="boolean" />
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3F5F8"
+        tools:context=".activity.ProjectInfoActivity"
+        tools:showIn="@layout/activity_project_info"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:orientation="vertical"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:cardCornerRadius="6dp"
+                    >
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        >
+
+                        <ImageView
+                            android:id="@+id/image_project"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="16dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:contentDescription="@string/content_description_project_image"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ava"
+                            bind:s3ObjectKey="@{projectInfo.getImage()}"
+                            android:visibility="@{projectInfo.getImage() == null ? View.GONE : View.VISIBLE}"
+                            tools:visibility="visible"
+                            />
+
+                        <ProgressBar
+                            android:id="@+id/progress"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toRightOf="@+id/image_project"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:progress="@{projectInfo.progress}"
+                            tools:progress="50"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:visibility="@{projectInfo.isProgressEnabled() ? View.VISIBLE : View.GONE}"
+                            tools:visibility="visible"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/text_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_goneMarginTop="16dp"
+                            app:layout_constraintTop_toBottomOf="@+id/progress"
+                            app:layout_constraintLeft_toRightOf="@+id/image_project"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="12sp"
+                            android:text="@{projectInfo.isFinished() ? @string/label_finished : DateTextUtils.formatDate(projectInfo.getCreatedAt())}"
+                            tools:text="3/11/17, 10:07 PM"
+                            />
+
+                        <TextView
+                            android:id="@+id/text_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintTop_toBottomOf="@+id/text_date"
+                            app:layout_constraintLeft_toRightOf="@+id/image_project"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:textSize="16sp"
+                            android:textStyle="normal|bold"
+                            android:text="@{projectInfo.getTitle()}"
+                            tools:text="Apartment renovation"
+                            />
+
+                        <TextView
+                            android:id="@+id/text_description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintTop_toBottomOf="@+id/text_title"
+                            app:layout_constraintLeft_toRightOf="@+id/image_project"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:paddingBottom="16dp"
+                            android:textSize="14sp"
+                            android:textColor='@{projectInfo.getDescription() != null ? @color/text_gray : @color/text_gray_light}'
+                            android:text='@{projectInfo.getDescription() != null ? projectInfo.getDescription() : @string/label_nothing_here_yet}'
+                            tools:text="Job finished!"
+                            />
+
+                        <View
+                            android:id="@+id/view_highlighting"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:background="#80ffffff"
+                            android:visibility="@{projectInfo.isFinished() ? View.VISIBLE : View.GONE}"
+                            tools:visibility="gone"
+                            />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/label_owner"
+                    android:visibility="@{projectInfo.getOwner() != null ? View.VISIBLE : View.GONE}"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/layout_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:visibility="@{projectInfo.getOwner() != null ? View.VISIBLE : View.GONE}"
+                    >
+
+                    <ImageView
+                        android:id="@+id/image_owner"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/content_description_owner_photo"
+                        app:srcCompat="@drawable/ava"
+                        bind:s3ObjectKey="@{projectInfo.getOwner().getPhoto()}"
+                        android:scaleType="centerCrop"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_owner_name"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        tools:text="Virgie Parker"
+                        android:text="@{projectInfo.getOwner().getName() ?? projectInfo.getOwner().getEmail()}"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/label_managers"
+                    android:visibility="@{!projectInfo.getManagers().isEmpty() ? View.VISIBLE : View.GONE}"
+                    />
+                
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_managers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none"
+                    android:background="@null"
+                    android:visibility="@{!projectInfo.getManagers().isEmpty() ? View.VISIBLE : View.GONE}"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/label_clients"
+                    android:visibility="@{!projectInfo.getClients().isEmpty() ? View.VISIBLE : View.GONE}"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_clients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none"
+                    android:background="@null"
+                    android:visibility="@{!projectInfo.getClients().isEmpty() ? View.VISIBLE : View.GONE}"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="@{projectInfo.isCanEdit() ? View.VISIBLE : View.GONE}"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="@string/label_managers_invited"
+                        />
+
+                    <Button
+                        android:id="@+id/link_invite_managers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_blue"
+                        android:text="@string/link_invite_more_managers"
+                        style="@style/AppTheme.Button.Link"
+                        />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_managers_invited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none"
+                    android:background="@null"
+                    android:visibility="@{managersInvitedIsExists ? View.VISIBLE : View.GONE}"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="@{projectInfo.isCanEdit() ? View.VISIBLE : View.GONE}"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="@string/label_clients_invited"
+                        />
+
+                    <Button
+                        android:id="@+id/link_invite_clients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_blue"
+                        android:text="@string/link_invite_more_clients"
+                        style="@style/AppTheme.Button.Link"
+                        />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_clients_invited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none"
+                    android:background="@null"
+                    android:visibility="@{clientsInvitedIsExists ? View.VISIBLE : View.GONE}"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/label_owner_invited"
+                    android:visibility="@{ownerInvited != null ? View.VISIBLE : View.GONE}"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:visibility="@{ownerInvited != null ? View.VISIBLE : View.GONE}"
+                    >
+
+                    <ImageView
+                        android:id="@+id/image_owner_invited"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/content_description_owner_photo"
+                        app:srcCompat="@drawable/ava"
+                        bind:s3ObjectKey="@{ownerInvited.getPhoto()}"
+                        android:scaleType="centerCrop"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_owner_invited_name"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        tools:text="Virgie Parker"
+                        android:text="@{ownerInvited.getName() ?? ownerInvited.getEmail()}"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>

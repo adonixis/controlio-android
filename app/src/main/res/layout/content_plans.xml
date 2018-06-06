@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="planId" type="int" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:background="@color/gray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activity.PlansActivity"
+        tools:showIn="@layout/activity_plans"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@null"
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_free"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="6dp"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline_ver_free"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.6"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_title_free"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_free"
+                        android:textSize="24sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/label_free"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_info_free"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title_free"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_free"
+                        android:paddingBottom="16dp"
+                        android:textSize="14sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/label_1_project_month"
+                        />
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@color/green_blue"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_ver_free"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ToggleButton
+                            android:id="@+id/btn_free"
+                            style="@style/AppTheme.Button.Plan"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="16dp"
+                            android:checked="@{planId == 0}"
+                            android:textOff="@string/btn_plan_downgrade"
+                            android:textOn="@string/btn_plan_your_plan" />
+
+                    </FrameLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_five"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="6dp"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline_ver_five"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.6"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_ver_five"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:background="@color/green_blue"
+                        >
+
+                        <ToggleButton
+                            android:id="@+id/btn_five"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center"
+                            android:checked="@{planId == 1}"
+                            android:text="@{planId == 1 ? @string/btn_plan_your_plan : (planId > 1 ? @string/btn_plan_downgrade : @string/btn_plan_upgrade)}"
+                            android:textOff="@{planId > 1 ? @string/btn_plan_downgrade : @string/btn_plan_upgrade}"
+                            android:textOn="@string/btn_plan_your_plan"
+                            style="@style/AppTheme.Button.Plan"
+                            />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/text_title_five"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_five"
+                        android:textSize="24sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/label_five"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_info_five"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title_five"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_five"
+                        android:paddingBottom="16dp"
+                        android:textSize="14sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/label_5_projects_month"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_twenty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="6dp"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline_ver_twenty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.6"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_ver_twenty"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:background="@color/grapefruit"
+                        >
+
+                        <ToggleButton
+                            android:id="@+id/btn_twenty"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center"
+                            android:checked="@{planId == 2}"
+                            android:text="@{planId == 2 ? @string/btn_plan_your_plan : (planId > 2 ? @string/btn_plan_downgrade : @string/btn_plan_upgrade)}"
+                            android:textOff="@{planId > 2 ? @string/btn_plan_downgrade : @string/btn_plan_upgrade}"
+                            android:textOn="@string/btn_plan_your_plan"
+                            style="@style/AppTheme.Button.Plan"
+                            />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/text_title_twenty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_twenty"
+                        android:textSize="24sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/label_twenty"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_info_twenty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title_twenty"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_twenty"
+                        android:paddingBottom="16dp"
+                        android:textSize="14sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/label_20_projects_month"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_fifty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="6dp"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline_ver_fifty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.6"
+                        />
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_ver_fifty"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:background="@color/green_blue"
+                        >
+
+                        <ToggleButton
+                            android:id="@+id/btn_fifty"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center"
+                            android:checked="@{planId == 3}"
+                            android:textOff="@string/btn_plan_upgrade"
+                            android:textOn="@string/btn_plan_your_plan"
+                            style="@style/AppTheme.Button.Plan"
+                            />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/text_title_fifty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_fifty"
+                        android:textSize="24sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/label_fifty"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_info_fifty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title_fifty"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_ver_fifty"
+                        android:paddingBottom="16dp"
+                        android:textSize="14sp"
+                        android:textColor="#585d6c"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/label_50_projects_month"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="email"
+                android:textSize="16sp"
+                android:textColor="#805b606f"
+                android:text="@string/label_contact_us"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

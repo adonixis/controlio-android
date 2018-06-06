@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <ScrollView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@null"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:background="@null"
+                >
+
+                <ToggleButton
+                    android:id="@+id/toggle_btn_signup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:textOff="@string/btn_signup"
+                    android:textOn="@string/btn_signup"
+                    style="@style/AppTheme.ToggleButton.PastelPurple.Left"
+                    />
+
+                <ToggleButton
+                    android:id="@+id/toggle_btn_signin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="-1dp"
+                    android:layout_marginStart="-1dp"
+                    android:textOff="@string/btn_signin"
+                    android:textOn="@string/btn_signin"
+                    style="@style/AppTheme.ToggleButton.PastelPurple.Right"
+                    />
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                app:errorTextAppearance="@style/ErrorTextWhite"
+                app:errorEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                app:errorTextAppearance="@style/ErrorTextWhite"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_repeat_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                app:errorTextAppearance="@style/ErrorTextWhite"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_repeat_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_repeat_password"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_signup_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/btn_signup"
+                style="@style/AppTheme.Button.Login"
+                />
+
+            <Button
+                android:id="@+id/link_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@string/link_forgot_password"
+                style="@style/AppTheme.Button.Link"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

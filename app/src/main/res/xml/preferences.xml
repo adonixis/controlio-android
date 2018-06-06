@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/title_prefs_root">
+
+    <PreferenceCategory
+        android:key="preference_category_debug"
+        android:title="@string/title_prefs_category_debug">
+
+        <EditTextPreference
+            android:key="preference_api_url"
+            android:title="@string/title_prefs_api_url"
+            android:inputType="textUri"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="preference_category_account"
+        android:title="@string/title_prefs_category_account">
+
+        <Preference
+            android:key="preference_edit_profile"
+            android:title="@string/title_prefs_edit_profile" />
+
+        <Preference
+            android:key="preference_plans"
+            android:title="@string/title_prefs_plans"
+            android:summary="@string/summary_prefs_plan_free" />
+
+        <Preference
+            android:key="preference_payment_methods"
+            android:title="@string/title_prefs_payment_methods" />
+
+    </PreferenceCategory>
+
+    <Preference
+        android:key="preference_log_out"
+        android:title="@string/title_prefs_log_out"
+        />
+
+</PreferenceScreen>

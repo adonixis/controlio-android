@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="ru.adonixis.controlio.util.DateTextUtils"/>
+        <variable name="post" type="ru.adonixis.controlio.model.PostDetailsResponse" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:cardCornerRadius="6dp"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:id="@+id/image_manager"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:scaleType="centerCrop"
+                bind:s3ObjectKey="@{post.getAuthor().getPhoto()}"
+                app:srcCompat="@drawable/ava"
+                android:contentDescription="@string/content_description_manager_photo"
+                />
+
+            <TextView
+                android:id="@+id/label_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/image_manager"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:textColor="#a3adbb"
+                android:text="@string/label_manager"
+                />
+
+            <TextView
+                android:id="@+id/text_date_post"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/label_manager"
+                app:layout_constraintBottom_toBottomOf="@+id/label_manager"
+                app:layout_constraintLeft_toRightOf="@+id/label_manager"
+                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="end"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:textColor="#bf585d6c"
+                android:text='@{post.isEdited() ? @string/label_post_edited(DateTextUtils.formatDate(post.getCreatedAt())) : DateTextUtils.formatDate(post.getCreatedAt())}'
+                tools:text="(edited) 3/11/17, 10:07 PM"
+                />
+
+            <TextView
+                android:id="@+id/text_manager_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/label_manager"
+                app:layout_constraintLeft_toRightOf="@+id/image_manager"
+                app:layout_constraintRight_toRightOf="parent"
+                android:maxLines="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{post.getAuthor().getName() ?? post.getAuthor().getEmail()}"
+                tools:text="Mark Ward"
+                />
+
+            <TextView
+                android:id="@+id/text_post"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_manager_name"
+                app:layout_constraintLeft_toRightOf="@+id/image_manager"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingBottom="16dp"
+                android:textSize="14sp"
+                android:text='@{post.getType().equals("status") ? @string/label_status_changed(post.getText()) : post.getText()}'
+                tools:text="Waiting for payment"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_post"
+                app:layout_constraintLeft_toRightOf="@+id/image_manager"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@color/gray"
+                android:visibility="@{post.getAttachments().isEmpty() ? View.GONE : View.VISIBLE}"
+                android:id="@+id/view" />
+
+            <ImageView
+                android:id="@+id/icon_attachment"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_post"
+                app:layout_constraintRight_toRightOf="@+id/image_manager"
+                android:visibility="@{post.getAttachments().isEmpty() ? View.GONE : View.VISIBLE}"
+                app:srcCompat="@drawable/ic_attachment"
+                android:contentDescription="@string/content_description_icon_attachment"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_attachments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintLeft_toRightOf="@+id/image_manager"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingBottom="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="none"
+                android:background="@null"
+                android:overScrollMode="never"
+                android:visibility="@{post.getAttachments().isEmpty() ? View.GONE : View.VISIBLE}"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

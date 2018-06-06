@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable name="projectInfo" type="ru.adonixis.controlio.model.ProjectDetailsResponse" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:background="@color/gray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activity.EditProjectActivity"
+        tools:showIn="@layout/activity_edit_project"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:id="@+id/image_photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:scaleType="centerCrop"
+                bind:s3ObjectKey="@{projectInfo.getImage()}"
+                app:srcCompat="@drawable/camera_mask"
+                android:contentDescription="@string/content_description_project_image"
+                />
+
+            <Button
+                android:id="@+id/btn_edit_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/image_photo"
+                app:layout_constraintLeft_toLeftOf="@+id/image_photo"
+                app:layout_constraintRight_toRightOf="@+id/image_photo"
+                android:padding="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/green_blue"
+                android:text="@{projectInfo.getImage() != null ? @string/btn_edit : @string/btn_add}"
+                tools:text="@string/btn_edit"
+                style="@style/AppTheme.Button.Link"
+                />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/image_photo"
+                app:errorTextAppearance="@style/ErrorTextGray"
+                app:errorEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/hint_project_title"
+                    android:text="@{projectInfo.getTitle()}"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:errorTextAppearance="@style/ErrorTextGray"
+                app:errorEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/hint_project_description"
+                    android:text="@{projectInfo.getDescription()}"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_progress_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_description"
+                app:switchPadding="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/switch_progress_bar_enabled"
+                android:checked="@{projectInfo.isProgressEnabled()}"
+                tools:checked="true"
+                />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switch_progress_enabled"
+                android:text="@string/btn_save"
+                style="@style/AppTheme.Button.Submit"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

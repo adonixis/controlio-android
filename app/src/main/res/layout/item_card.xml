@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="android.text.Html" />
+        <import type="android.support.v4.content.ContextCompat" />
+        <import type="com.stripe.android.view.CardInputWidget" />
+        <variable name="card" type="ru.adonixis.controlio.model.StripeSourceResponse" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/image_card_brand"
+            android:layout_height="21dp"
+            android:layout_width="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/content_description_card_brand"
+            android:scaleType="centerCrop"
+            android:src="@{ContextCompat.getDrawable(context, CardInputWidget.BRAND_RESOURCE_MAP.get(card.getBrand()))}"
+            />
+
+        <TextView
+            android:id="@+id/text_card_number"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_vertical"
+            tools:text="Visa ending in 1234"
+            android:textColor="@{card.isDefaultSource() ? @color/green_blue : @color/text_gray}"
+            android:textSize="17sp"
+            android:text="@{Html.fromHtml(@string/label_card_ending(card.getBrand(), card.getLast4()))}"
+            />
+
+        <ImageView
+            android:id="@+id/image_card_is_default"
+            android:layout_height="24dp"
+            android:layout_width="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/content_description_card_is_default"
+            app:srcCompat="@drawable/ic_done_green_24dp"
+            android:scaleType="centerCrop"
+            tools:visibility="visible"
+            android:visibility="@{card.isDefaultSource() ? View.VISIBLE : View.GONE}"
+            />
+
+    </LinearLayout>
+
+</layout>

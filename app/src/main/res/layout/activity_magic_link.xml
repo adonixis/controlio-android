@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <ScrollView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@null"
+            >
+
+            <ImageView
+                android:src="@drawable/controlio_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="72dp"
+                android:layout_marginTop="96dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="34sp"
+                android:textColor="@color/white"
+                android:text="@string/label_magic_link"
+                android:fontFamily="sans-serif-light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:text="@string/label_use_it_to_login"
+                android:fontFamily="sans-serif-light"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layout_input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                app:errorTextAppearance="@style/ErrorTextWhite"
+                app:errorEnabled="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_get_magic_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/btn_get_magic_link"
+                style="@style/AppTheme.Button.Login"
+                />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btn_facebook_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                />
+
+            <Button
+                android:id="@+id/link_demo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@string/link_try_demo"
+                style="@style/AppTheme.Button.Link"
+                />
+
+            <Button
+                android:id="@+id/link_usual_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@string/link_usual_login"
+                style="@style/AppTheme.Button.Link"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

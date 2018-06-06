@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="ru.adonixis.controlio.util.DateTextUtils"/>
+        <import type="android.view.View"/>
+        <variable name="project" type="ru.adonixis.controlio.model.ProjectResponse" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@null"
+        app:cardCornerRadius="6dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:id="@+id/image_project"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:contentDescription="@string/content_description_project_image"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ava"
+                bind:s3ObjectKey="@{project.getImage()}"
+                android:visibility="@{project.getImage() == null ? View.GONE : View.VISIBLE}"
+                tools:visibility="visible"
+                />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/image_project"
+                app:layout_constraintRight_toRightOf="parent"
+                android:progress="@{project.progress}"
+                tools:progress="50"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:visibility="@{project.isProgressEnabled() ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_goneMarginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/progress"
+                app:layout_constraintLeft_toRightOf="@+id/image_project"
+                app:layout_constraintRight_toRightOf="parent"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text="@{project.isFinished() ? @string/label_finished : DateTextUtils.formatDate(project.getCreatedAt())}"
+                tools:text="3/11/17, 10:07 PM"
+                />
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_date"
+                app:layout_constraintLeft_toRightOf="@+id/image_project"
+                app:layout_constraintRight_toRightOf="parent"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textStyle="normal|bold"
+                android:text="@{project.getTitle()}"
+                tools:text="Apartment renovation"
+                />
+
+            <TextView
+                android:id="@+id/text_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_title"
+                app:layout_constraintLeft_toRightOf="@+id/image_project"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingBottom="16dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textColor='@{(project.getLastStatus().getText() != null || project.getLastPost().getText() != null) ? @color/text_gray : @color/text_gray_light}'
+                android:text='@{project.getLastStatus().getText() != null ? (project.getLastStatus().getAuthor().getName() ?? project.getLastStatus().getAuthor().getEmail()) + ": " + project.getLastStatus().getText() : (project.getLastPost().getText() != null ? (project.getLastPost().getAuthor().getName() ?? project.getLastPost().getAuthor().getEmail()) + ": " + project.getLastPost().getText() : @string/label_nothing_here_yet)}'
+                tools:text="Job finished!"
+                />
+
+            <View
+                android:id="@+id/view_highlighting"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="#80ffffff"
+                android:visibility="@{project.isFinished() ? View.VISIBLE : View.GONE}"
+                tools:visibility="gone"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

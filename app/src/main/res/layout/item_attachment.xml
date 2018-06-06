@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable name="attachment" type="String" />
+    </data>
+
+    <ImageView
+        android:id="@+id/image_attachment"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        bind:s3ObjectKey="@{attachment}"
+        app:srcCompat="@drawable/ava"
+        android:contentDescription="@string/content_description_attachment"
+        />
+
+</layout>

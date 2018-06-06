@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="support"
+        android:enabled="true"
+        android:icon="@drawable/ic_support_purple_48dp"
+        android:shortcutShortLabel="@string/shortcut_support_short_label"
+        android:shortcutLongLabel="@string/shortcut_support_long_label"
+        >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="ru.adonixis.controlio"
+            android:targetClass="ru.adonixis.controlio.activity.MainActivity"
+            />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="ru.adonixis.controlio"
+            android:targetClass="ru.adonixis.controlio.activity.SupportActivity"
+            />
+    </shortcut>
+</shortcuts>
